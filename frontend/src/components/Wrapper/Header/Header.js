@@ -7,17 +7,7 @@ import "./header.scss";
 
 import logo from "../../../assets/images/Main/logo.png";
 
-const toShow = (value) => {
-  if (value === "menuShow") {
-    document.getElementById("menu").style.visibility = "visible";
-    document.getElementById("menu").style.opacity = "1";
-    if (true) {
-      document.getElementById("showcase").style.paddingLeft = "20vw";
-    }
-  }
-};
-
-const Header = ({ isMainMode }) => {
+const Header = ({ isMainMode, setMenuShow }) => {
   const { state, dispatch } = useAuthContext();
   const history = useHistory();
   const isAuth = state.token;
@@ -30,7 +20,7 @@ const Header = ({ isMainMode }) => {
     <div className="navbar">
       <div className="subHeader flex">
         {isMainMode && (
-          <i className="fas fa-filter" onClick={() => toShow("menuShow")} />
+          <i className="fas fa-filter" onClick={() => setMenuShow(true)} />
         )}
         <div className="image">
           <NavLink to="/main">
