@@ -1,18 +1,19 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import useAuthContext from "../../../context/useContext";
-import * as actions from "../../../context/actions";
+import { useDispatch, connect } from "react-redux";
+import { changeMenuShowing } from "../../../store/uiSlice/uiSlice";
+import { onLogOut } from "../../../store/authSlice/authSlice";
 
 import "./header.scss";
 
 import logo from "../../../assets/images/Main/logo.png";
 
-const Header = ({ isMainMode, setMenuShow }) => {
-  const { state, dispatch } = useAuthContext();
+const Header = ({ isMainMode, authState }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const isAuth = state.token;
-  const onLogOut = () => {
-    dispatch(actions.logOut());
+  const isAuth = authState.token;
+  const onLogOutFunc = () => {
+    dispatch(onLogOut());
     history.push("/main");
   };
 
@@ -20,7 +21,10 @@ const Header = ({ isMainMode, setMenuShow }) => {
     <div className="navbar">
       <div className="subHeader flex">
         {isMainMode && (
-          <i className="fas fa-filter" onClick={() => setMenuShow(true)} />
+          <i
+            className="fas fa-filter"
+            onClick={() => dispatch(changeMenuShowing(true))}
+          />
         )}
         <div className="image">
           <NavLink to="/main">
@@ -51,7 +55,7 @@ const Header = ({ isMainMode, setMenuShow }) => {
                   alignItems: "center",
                 }}
               >
-                {state.surname && state.name && (
+                {authState.surname && authState.name && (
                   <p
                     style={{
                       width: "100px",
@@ -61,7 +65,10 @@ const Header = ({ isMainMode, setMenuShow }) => {
                       textOverflow: "ellipsis",
                     }}
                   >
-                    {state.surname + " " + state.name[0].toUpperCase() + "."}
+                    {authState.surname +
+                      " " +
+                      authState.name[0].toUpperCase() +
+                      "."}
                   </p>
                 )}
                 <i className="fas fa-user" />
@@ -81,7 +88,7 @@ const Header = ({ isMainMode, setMenuShow }) => {
             {isAuth && (
               <>
                 <div className="divider hide" />
-                <button onClick={onLogOut} className="hide">
+                <button onClick={onLogOutFunc} className="hide">
                   Вийти
                 </button>
               </>
@@ -93,4 +100,8 @@ const Header = ({ isMainMode, setMenuShow }) => {
   );
 };
 
-export default Header;
+const mapState = (state) => ({
+  authState: state.auth,
+});
+
+export default connect(mapState)(Header);

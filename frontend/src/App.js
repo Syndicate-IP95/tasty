@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import useAuthContext from "./context/useContext";
-import * as actions from "./context/actions";
+import { useDispatch, connect } from "react-redux";
+import { successLogin } from "./store/authSlice/authSlice";
 
 import Auth from "./pages/Auth/Auth";
 import Main from "./pages/Main/Main";
@@ -12,10 +12,10 @@ import Page404 from "./components/UI/Page404/Page404";
 import Spinner from "./components/UI/Spinner/Spinner";
 import { getUserByToken } from "./api/auth";
 
-const App = () => {
+const App = ({ authState }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { state, dispatch } = useAuthContext();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getUserInfo = async (token) => {
@@ -24,7 +24,7 @@ const App = () => {
         const result = await getUserByToken(token);
         console.log(result);
         dispatch(
-          actions.successLogIn({
+          successLogin({
             token: token,
             name: result.data.name,
             surname: result.data.surname,
@@ -39,8 +39,8 @@ const App = () => {
       }
     };
 
-    if (state.token) {
-      getUserInfo(state.token);
+    if (authState.token) {
+      getUserInfo(authState.token);
     }
   }, []);
 
@@ -83,10 +83,14 @@ const App = () => {
       )}
       {error && <></>}
       {!loading && !error && (
-        <Wrapper>{state.token ? authRoutes : unAuthRoutes}</Wrapper>
+        <Wrapper>{authState.token ? authRoutes : unAuthRoutes}</Wrapper>
       )}
     </>
   );
 };
 
-export default App;
+const mapState = (state) => ({
+  authState: state.auth,
+});
+
+export default connect(mapState)(App);

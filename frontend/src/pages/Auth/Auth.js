@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import useContext from "../../context/useContext";
-import * as actions from "../../context/actions/index";
+import { useDispatch } from "react-redux";
+
 import Spinner from "../../components/UI/Spinner/Spinner";
 import ModalWindow from "../../components/UI/Modal/ModalWindow";
-
 import { login, signup } from "../../api/auth";
+import { successLogin } from "../../store/authSlice/authSlice";
 
 import "./Auth.scss";
 
@@ -15,7 +15,7 @@ import eyeOpen from "../../assets/images/Auth/eye.svg";
 import eyeClosed from "../../assets/images/Auth/eyeClosed.svg";
 
 const Auth = (props) => {
-  const { dispatch } = useContext();
+  const dispatch = useDispatch();
   const [showPass, setShowPass] = useState(false);
 
   const [logInData, setLogInData] = useState({
@@ -190,7 +190,7 @@ const Auth = (props) => {
 
     try {
       const result = await login(logInData);
-      dispatch(actions.successLogIn(result.data));
+      dispatch(successLogin(result.data));
       return props.history.push("/main");
     } catch (err) {
       setError(
@@ -208,7 +208,7 @@ const Auth = (props) => {
     setLoading(true);
 
     try {
-      const result = await signup(signUpData);
+      await signup(signUpData);
       onChangeMode("login");
       setModalInfo({
         type: "sentence-modal",

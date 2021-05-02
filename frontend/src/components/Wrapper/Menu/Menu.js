@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, connect } from "react-redux";
+import { changeMenuShowing } from "../../../store/uiSlice/uiSlice";
 
 import "./Menu.scss";
 
@@ -18,17 +20,14 @@ const toShow = (value) => {
   }
 };
 
-const Menu = ({ menuShow, setMenuShow }) => {
-  if (menuShow) {
-    document.getElementById("showcase").style.paddingLeft = "20vw";
-  } else {
-    document.getElementById("showcase").style.paddingLeft = "0";
-  }
+const Menu = ({ uiState }) => {
+  const dispatch = useDispatch();
+  const { showMenu } = uiState;
 
   return (
     <div
       style={
-        menuShow
+        showMenu
           ? {
               visibility: "visible",
               opacity: 1,
@@ -42,7 +41,10 @@ const Menu = ({ menuShow, setMenuShow }) => {
       className="menu"
     >
       <div className="bar">
-        <i class="fal fa-times" onClick={() => setMenuShow(false)}></i>
+        <i
+          class="fal fa-times"
+          onClick={() => dispatch(changeMenuShowing(false))}
+        ></i>
         <div className="mainMenuElement">
           <p>Сортувати за</p>
         </div>
@@ -96,4 +98,8 @@ const Menu = ({ menuShow, setMenuShow }) => {
   );
 };
 
-export default Menu;
+const mapState = (state) => ({
+  uiState: state.ui,
+});
+
+export default connect(mapState)(Menu);
