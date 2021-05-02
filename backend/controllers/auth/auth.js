@@ -180,6 +180,7 @@ exports.logIn = (req, res) => {
           userId: userExist.rows[0].id,
           name: userExist.rows[0].name,
           surname: userExist.rows[0].surname,
+          email: userExist.rows[0].email,
         })
       );
     }
