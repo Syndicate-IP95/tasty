@@ -1,0 +1,19 @@
+.add-ingr-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 30px;
+
+    input {
+        margin: 10px 0;
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 16px;
+        transition: border, background-color 0.2s ease;
+    }
+
+    input:focus {
+        border: 2px solid #870006;
+        background-color: rgb(255, 251, 228);
+    }
+}

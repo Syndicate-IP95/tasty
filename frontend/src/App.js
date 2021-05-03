@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useDispatch, connect } from "react-redux";
-import { successLogin } from "./store/authSlice/authSlice";
+import { successLogin, onLogOut } from "./store/authSlice/authSlice";
 
+// pages
 import Auth from "./pages/Auth/Auth";
 import Main from "./pages/Main/Main";
 import Recipe from "./pages/Recipe/Recipe";
 import Profile from "./pages/Profile/Profile";
+import AddRecipe from "./pages/AddRecipe/AddRecipe";
+
 import Wrapper from "./components/Wrapper/Wrapper";
 import Page404 from "./components/UI/Page404/Page404";
 import Spinner from "./components/UI/Spinner/Spinner";
@@ -33,7 +36,7 @@ const App = ({ authState }) => {
         );
       } catch (e) {
         console.log(e);
-        setError(true);
+        dispatch(onLogOut());
       } finally {
         setLoading(false);
       }
@@ -42,12 +45,24 @@ const App = ({ authState }) => {
     if (authState.token) {
       getUserInfo(authState.token);
     }
+
+    return () => {};
   }, []);
 
   const unAuthRoutes = (
     <Switch>
-      <Route path="/auth" render={(props) => <Auth {...props} />} />
-      <Route path="/main" render={(props) => <Main {...props} />} />
+      <Route exact path="/auth" render={(props) => <Auth {...props} />} />
+      <Route exact path="/main" render={(props) => <Main {...props} />} />
+      <Route
+        exact
+        path="/add-recipe"
+        render={(props) => <AddRecipe {...props} />}
+      />
+      <Route
+        exact
+        path="/recipe/:id"
+        render={(props) => <Recipe {...props} />}
+      />
       <Route exact path="/">
         <Redirect to="/main" />
       </Route>
@@ -56,9 +71,18 @@ const App = ({ authState }) => {
 
   const authRoutes = (
     <Switch>
-      <Route path="/recipe" render={(props) => <Recipe {...props} />} />
-      <Route path="/main" render={(props) => <Main {...props} />} />
-      <Route path="/profile" render={(props) => <Profile {...props} />} />
+      <Route exact path="/main" render={(props) => <Main {...props} />} />
+      <Route
+        exact
+        path="/add-recipe"
+        render={(props) => <AddRecipe {...props} />}
+      />
+      <Route
+        exact
+        path="/recipe/:id"
+        render={(props) => <Recipe {...props} />}
+      />
+      <Route exact path="/profile" render={(props) => <Profile {...props} />} />
       <Route exact path="/">
         <Redirect to="/main" />
       </Route>

@@ -39,8 +39,8 @@ const Header = ({ isMainMode, authState }) => {
                 <i className="fas fa-search" />
               </div>
             )}
-            {isMainMode && (
-              <button>
+            {isMainMode && isAuth && (
+              <button onClick={redirectToCreateRecipe}>
                 <i className="fas fa-plus"></i>
                 Додати рецепт
               </button>
@@ -98,6 +98,10 @@ const Header = ({ isMainMode, authState }) => {
       </div>
     </div>
   );
+
+  function redirectToCreateRecipe() {
+    history.push("/add-recipe");
+  }
 };
 
 const mapState = (state) => ({

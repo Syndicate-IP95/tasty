@@ -5,7 +5,7 @@ import recipe from "../../assets/images/Main/recipe.jpg";
 
 const Recipe = props => {
 	return (
-		<div className="">
+		<div>
 			<div className="recipePage">
 				<div className="recipeForm">
 					<div className="title">

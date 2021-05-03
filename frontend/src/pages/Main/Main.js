@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 // icons
@@ -8,6 +9,7 @@ import "./main.scss";
 
 const Main = ({ uiState }) => {
   const { showMenu } = uiState;
+  const history = useHistory();
 
   return (
     <div className="main">
@@ -17,7 +19,7 @@ const Main = ({ uiState }) => {
           style={showMenu ? { paddingLeft: "20vw" } : { paddingLeft: 0 }}
           className="recipesTable"
         >
-          <div className="card">
+          <div onClick={() => redirectToRecipe(3)} className="card">
             <img className="image" src={recipe} alt="" />
             <div className="field">
               <div>
@@ -141,6 +143,10 @@ const Main = ({ uiState }) => {
       </footer>
     </div>
   );
+
+  function redirectToRecipe(id) {
+    history.push(`/recipe/${id}`);
+  }
 };
 
 const mapState = (state) => ({

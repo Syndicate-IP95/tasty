@@ -17,6 +17,7 @@
         min-width: 400px;
         width: 50%;
         max-width: 600px;
+        min-height: 400px;
         max-height: 600px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -52,14 +53,26 @@
         display: flex;
         justify-content: flex-end;
 
-        .cflow-button {
+        .button {
             margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .modal-window-btn-no,
+        .modal-window-btn-yes {
+            padding: 0.6875rem 1.125rem;
+            background-color: transparent;
+            border: 1px solid #870006;
+            color: #000;
+            text-transform: uppercase;
+            border-radius: 0.25rem;
         }
     }
 
     &.empty {
         opacity: 0;
         z-index: -1;
+        display: none;
 
         .cflow-modal-window {
             opacity: 0;
