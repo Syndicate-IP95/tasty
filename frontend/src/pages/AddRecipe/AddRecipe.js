@@ -7,6 +7,7 @@ import {
   sOnDeleteIng,
   onSetTitle,
   onSetContent,
+  sOnCreateRecipe,
 } from "./service";
 
 import "./style.scss";
@@ -172,7 +173,15 @@ const AddRecipe = () => {
     });
   }
 
-  function onCreateRecipe() {}
+  function onCreateRecipe() {
+    const body = {
+      title: title,
+      content: content,
+      ings: ings,
+      photo: uploadedFile.imagePreviewUrl,
+    };
+    sOnCreateRecipe(body);
+  }
 };
 
 export default AddRecipe;

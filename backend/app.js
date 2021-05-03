@@ -1,6 +1,7 @@
 'use strict';
 
 require('dotenv/config');
+const { pool } = require('./db/database');
 const http = require('http');
 const { headers } = require('./utils/headers/headers');
 const Router = require('./routes/router');

@@ -1,3 +1,5 @@
+import { saveRecipe } from "../../api/recipe";
+
 export const sOnAddIngItem = (settingData) => {
   const { ings, setIngs, setModalInfo } = settingData;
 
@@ -44,4 +46,16 @@ export const onSetContent = (e, settingData) => {
   } else {
     setContent(value);
   }
+};
+
+export const sOnCreateRecipe = (body) => {
+  console.log(body);
+  const formData = {
+    title: body.title,
+    content: body.content,
+    ings: JSON.stringify(body.ings),
+    file: body.photo,
+  };
+
+  return saveRecipe(formData);
 };

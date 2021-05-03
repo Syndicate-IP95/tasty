@@ -76,7 +76,7 @@ exports.signUp = (req, res) => {
       res.end(JSON.stringify({ message: "Cерверна помилка" }));
     }
 
-    if (userExist.rows[0]) {
+    if (userExist && userExist.rows[0]) {
       // if exists return 400 error
       res.writeHead(400, headers);
       res.end(
