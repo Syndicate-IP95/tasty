@@ -7,6 +7,7 @@ const User = require("../../models/user");
 const validate = require("../../utils/validation/validation");
 const getUserInfoByToken = require("../../utils/getUserInfoByToken");
 const { headers } = require("../../utils/headers/headers");
+const { user } = require("../../config");
 
 // validation
 const rulesName = { required: true, maxLength: 255, minLength: 2 };
@@ -76,7 +77,7 @@ exports.signUp = (req, res) => {
       res.end(JSON.stringify({ message: "Cерверна помилка" }));
     }
 
-    if (userExist.rows[0]) {
+    if (userExist && userExist.rows[0]) {
       // if exists return 400 error
       res.writeHead(400, headers);
       res.end(
