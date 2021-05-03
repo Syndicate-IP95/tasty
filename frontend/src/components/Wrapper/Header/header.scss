@@ -5,12 +5,13 @@
 	color: #333;
 	height: 60px;
 
-	.fa-bars {
+	.fa-filter {
 		padding: 10px;
+		margin: 0 0 0 10px;
 		cursor: pointer;
 	}
 
-	.fa-bars:hover {
+	.fa-filter:hover {
 		margin-top: 1px;
 		border-bottom: 1px solid rgb(150, 150, 150);
 	}
@@ -22,6 +23,7 @@
 	}
 
 	#searchBar {
+		z-index: 0;
 		height: 28px;
 		outline: none;
 		color: #333;
@@ -31,7 +33,22 @@
 		border-radius: 5px;
 		box-shadow: 0 0 5px grey;
 
+		#search {
+			z-index: 1;
+			height: 28px;
+			position: relative;
+			background-color: transparent;
+			outline: none;
+			color: #333;
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			top: -5px;
+			left: -5px;
+		}
+
 		.fa-search {
+			z-index: 1;
 			float: right;
 			font-size: 20px;
 		}
@@ -39,19 +56,6 @@
 
 	#searchBar:hover {
 		box-shadow: 0 0 5px black;
-	}
-
-	#search {
-		height: 28px;
-		position: relative;
-		background-color: transparent;
-		outline: none;
-		color: #333;
-		padding: 5px;
-		border-radius: 5px;
-		border: none;
-		top: -5px;
-		left: -5px;
 	}
 
 	.fa-plus {
@@ -110,16 +114,29 @@
 		}
 	}
 
-	.flex {
-		justify-content: space-between;
+	.subHeader {
+		.container {
+			.flex {
+				height: 60px;
+			}
+		}
+
+		.flex {
+			justify-content: space-between;
+		}
 	}
 }
 
-@media only screen and (min-width: 1880px) {
+@media only screen and (min-width: 3100px) {
 	.navbar {
+		transform-origin: left top;
+		transform: scale(2.25);
+		width: calc(100% / 2.25);
+		height: 60px;
 		.container {
+			width: 1100px;
 			margin: 0 auto;
-			padding: 0 40;
+			padding: 0 20px;
 		}
 	}
 
@@ -141,11 +158,46 @@
 	}
 }
 
-@media only screen and (max-width: 1880px) {
+@media only screen and (max-width: 3100px) {
 	.navbar {
+		transform-origin: left top;
+		transform: scale(1.5);
+		width: calc(100% / 1.5);
+		height: 60px;
+		.container {
+			width: 1100px;
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+	}
+
+	#searchBar {
+		width: 450px;
+	}
+
+	#search {
+		width: 420px;
+	}
+
+	.image {
+		width: 130px;
+	}
+
+	.hide {
+		display: block;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 1920px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(1);
+		width: calc(100% / 1);
+		height: 60px;
 		.container {
 			margin: 0 auto;
-			padding: 0 40;
+			padding: 0 20px;
 		}
 	}
 
@@ -169,20 +221,14 @@
 
 @media only screen and (max-width: 1080px) {
 	.navbar {
+		transform-origin: left top;
+		transform: scale(0.65);
+		width: calc(100% / 0.65);
+		height: 60px;
 		.container {
-			background-color: white;
 			margin: 0 auto;
-			padding: 0 40;
+			padding: 0 20px;
 		}
-	}
-
-	#searchBar {
-		min-width: 200px;
-		width: auto;
-	}
-
-	#search {
-		width: 200px;
 	}
 
 	.image {
@@ -197,20 +243,14 @@
 
 @media only screen and (max-width: 860px) {
 	.navbar {
+		transform-origin: left top;
+		transform: scale(0.5);
+		width: calc(100% / 0.5);
+		height: 60px;
 		.container {
-			background-color: white;
 			margin: 0 auto;
 			padding: 0 10px;
 		}
-	}
-
-	#searchBar {
-		min-width: 200px;
-		width: auto;
-	}
-
-	#search {
-		width: 200px;
 	}
 
 	.image {
@@ -225,6 +265,11 @@
 
 @media only screen and (max-width: 620px) {
 	.navbar {
+		transform-origin: left top;
+		transform: scale(0.4);
+		width: calc(100% / 0.4);
+		height: 60px;
+
 		.container {
 			margin: 0 auto;
 			padding: 0 10px;
@@ -232,17 +277,8 @@
 
 		.image {
 			margin-top: -3px;
-			width: 90px;
+			width: 130px;
 		}
-	}
-
-	#searchBar {
-		min-width: 90px;
-		width: auto;
-	}
-
-	#search {
-		width: 60px;
 	}
 
 	.hide {
@@ -250,8 +286,12 @@
 		width: 0;
 	}
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 375px) {
 	.navbar {
+		transform-origin: left top;
+		transform: scale(1);
+		width: calc(100% / 1);
+		height: 60px;
 		.container {
 			margin: 0 auto;
 			padding: 0 10px;

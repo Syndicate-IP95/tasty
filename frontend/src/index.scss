@@ -1,14 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
 * {
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
 	box-sizing: border-box;
 	outline: none;
-	font-family: Poppins, sans-serif;
+	// font-family: Poppins, sans-serif;
+	font-family: "Roboto Condensed", sans-serif;
 }
-html,
-body {
-	height: 100%;
+html {
+	background-color: #eeeeee;
 }
 body {
 	overflow-y: auto;
@@ -32,7 +34,7 @@ img {
 	max-width: 1200px;
 	margin: 0 auto;
 	overflow: hidden;
-	padding: 0 40px;
+	padding: 0 20px;
 }
 
 .flex {

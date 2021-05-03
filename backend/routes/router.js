@@ -1,4 +1,5 @@
 const authR = require('./auth');
+const recipeR = require('./recipe');
 const { headers } = require('../utils/headers/headers');
 
 class Router {
@@ -7,12 +8,14 @@ class Router {
         this.url = url;
         this.method = method;
         this.routes = {
-            ...authR
+            ...authR,
+            ...recipeR
         }
     }
 
     usage(req, res) {
         const { url, method, routes } = this;
+        
         if (routes[url] && routes[url][method]) {
             routes[url][method](req, res);
         } else {
