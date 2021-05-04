@@ -208,6 +208,7 @@ const AddRecipe = () => {
         history.push("/main");
       } else {
         await sOnCreateRecipe(body);
+        history.push("/main");
       }
     } catch (e) {
       setError(
