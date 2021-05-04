@@ -49,7 +49,6 @@ export const onSetContent = (e, settingData) => {
 };
 
 export const sOnCreateRecipe = (body) => {
-  console.log(body);
   const formData = {
     title: body.title,
     content: body.content,

@@ -22,7 +22,7 @@
         category VARCHAR(255),
         ingredients TEXT,
         steps TEXT,
-        title TEXT
+        title TEXT,
     );
 
     DROP TABLE IF EXISTS comments;

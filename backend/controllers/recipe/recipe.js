@@ -65,10 +65,7 @@ exports.saveRecipe = (req, res) => {
       );
     }
 
-    //console.log(body);
-    //console.log(userInfo);
-
-    //const result = await uploadFileToAWS(body.file);
-    //console.log(result);
+    res.writeHead(200, headers);
+    return res.end();
   });
 };
