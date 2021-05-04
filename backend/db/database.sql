@@ -18,9 +18,11 @@
         FOREIGN KEY (user_id) REFERENCES users(id),
         photo_url VARCHAR,
         rating NUMERIC(3, 2),
+        author VARCHAR,
         category VARCHAR(255),
         ingredients TEXT,
-        steps TEXT
+        steps TEXT,
+        title TEXT
     );
 
     DROP TABLE IF EXISTS comments;

@@ -2,20 +2,15 @@ const AWS = require("aws-sdk");
 const uuid = require("uuid");
 
 exports.uploadFileToAWS = async (base64File) => {
-  const {
-    ACCESS_KEY_ID,
-    SECRET_ACCESS_KEY,
-    AWS_REGION,
-    S3_BUCKET,
-  } = process.env;
+  if (base64File === "" || !base64File) {
+    return null;
+  }
+
+  const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, S3_BUCKET } = process.env;
 
   const s3 = new AWS.S3({
     accessKeyId: ACCESS_KEY_ID,
     secretAccessKey: SECRET_ACCESS_KEY,
-    region: AWS_REGION,
-    params: {
-      Bucket: S3_BUCKET,
-    },
   });
 
   const buf = new Buffer.from(
@@ -24,19 +19,20 @@ exports.uploadFileToAWS = async (base64File) => {
   );
   const type = base64File.split(";")[0].split("/")[1];
 
-  const data = {
-    Key: uuid.v1(),
+  const params = {
+    Bucket: S3_BUCKET,
+    Key: uuid.v1() + `.${type}`,
     Body: buf,
-    ContentEncoding: "base64",
-    ContentType: `image/${type}`,
   };
-  const f = await s3.putObject(data, function (err, data) {
-    if (err) {
-      console.log(err);
-      console.log("Error uploading data: ", data);
-    } else {
-      console.log("successfully uploaded the image!");
-    }
+
+  return new Promise((resolve, reject) => {
+    s3.upload(params, function (err, data) {
+      if (err) {
+        resolve(null);
+      } else {
+        console.log("data location:", data.Location);
+        resolve(data.Location);
+      }
+    });
   });
-  return f;
 };

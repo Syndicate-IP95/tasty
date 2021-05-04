@@ -7,6 +7,7 @@ const User = require("../../models/user");
 const validate = require("../../utils/validation/validation");
 const getUserInfoByToken = require("../../utils/getUserInfoByToken");
 const { headers } = require("../../utils/headers/headers");
+const { user } = require("../../config");
 
 // validation
 const rulesName = { required: true, maxLength: 255, minLength: 2 };
