@@ -196,7 +196,7 @@ const Auth = (props) => {
       setError(
         err.response && err.response.data && err.response.data.message
           ? err.response.data.message
-          : "Сталась серверна помилка..."
+          : `${err}`
       );
       setLoading(false);
     } finally {
@@ -221,7 +221,7 @@ const Auth = (props) => {
       setError(
         err.response && err.response.data && err.response.data.message
           ? err.response.data.message
-          : "Сталась серверна помилка..."
+          : `${err}`
       );
       setLoading(false);
     } finally {

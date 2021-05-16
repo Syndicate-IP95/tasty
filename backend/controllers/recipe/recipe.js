@@ -52,7 +52,7 @@ exports.saveRecipe = (req, res) => {
       if (savedUrl && savedUrl.message) {
         res.writeHead(500, headers);
         return res.end(
-          JSON.stringify({ message: "Сталась серверна помилка..." })
+          JSON.stringify({ message: `${e}` })
         );
       }
 
@@ -61,7 +61,7 @@ exports.saveRecipe = (req, res) => {
       console.log(e);
       res.writeHead(500, headers);
       return res.end(
-        JSON.stringify({ message: "Сталась серверна помилка..." })
+        JSON.stringify({ message: `${e}` })
       );
     }
 

@@ -1,6 +1,3 @@
-    DROP DATABASE IF EXISTS tasty;
-    CREATE  DATABASE tasty;
-
     DROP TABLE IF EXISTS users;
     CREATE TABLE users(
         id SERIAL PRIMARY KEY,
@@ -18,8 +15,8 @@
         FOREIGN KEY (user_id) REFERENCES users(id),
         photo_url VARCHAR,
         rating NUMERIC(3, 2),
-        author VARCHAR,
         category VARCHAR(255),
+        tag VARCHAR(255)
         ingredients TEXT,
         steps TEXT,
         title TEXT,

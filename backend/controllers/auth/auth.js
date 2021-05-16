@@ -74,7 +74,7 @@ exports.signUp = (req, res) => {
       userExist = await User.searchByEmail(body.email);
     } catch (e) {
       res.writeHead(400, headers);
-      res.end(JSON.stringify({ message: "Cерверна помилка" }));
+      res.end(JSON.stringify({ message: `${e}` }));
     }
 
     if (userExist && userExist.rows[0]) {
@@ -102,7 +102,7 @@ exports.signUp = (req, res) => {
       } catch (e) {
         console.log(e);
         res.writeHead(400, headers);
-        res.end(JSON.stringify({ message: "Cерверна помилка" }));
+        res.end(JSON.stringify({ message: `${e}` }));
       }
       res.writeHead(200, headers);
       return res.end(
@@ -143,7 +143,7 @@ exports.logIn = (req, res) => {
       userExist = await User.searchByEmail(body.email);
     } catch (e) {
       res.writeHead(400, headers);
-      res.end(JSON.stringify({ message: "Cерверна помилка" }));
+      res.end(JSON.stringify({ message: `${e}` }));
     }
 
     if (!userExist.rows[0]) {
