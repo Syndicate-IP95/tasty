@@ -1,0 +1,319 @@
+.navbar {
+	grid-area: navbar;
+	overflow: hidden;
+	background-color: white;
+	color: #333;
+	height: 60px;
+
+	.fa-filter {
+		padding: 10px;
+		margin: 0 0 0 10px;
+		cursor: pointer;
+	}
+
+	.fa-filter:hover {
+		margin-top: 1px;
+		border-bottom: 1px solid rgb(150, 150, 150);
+	}
+
+	.image {
+		cursor: pointer;
+		margin-top: -5px;
+		width: 130px;
+	}
+
+	#searchBar {
+		z-index: 0;
+		height: 28px;
+		outline: none;
+		color: #333;
+		padding: 5px;
+		margin: 0 5px;
+		border: none;
+		border-radius: 5px;
+		box-shadow: 0 0 5px grey;
+
+		#search {
+			z-index: 1;
+			height: 28px;
+			position: relative;
+			background-color: transparent;
+			outline: none;
+			color: #333;
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			top: -5px;
+			left: -5px;
+		}
+
+		.fa-search {
+			z-index: 1;
+			float: right;
+			font-size: 20px;
+		}
+	}
+
+	#searchBar:hover {
+		box-shadow: 0 0 5px black;
+	}
+
+	.fa-plus {
+		margin-right: 7px;
+		margin-left: -9px;
+	}
+
+	button {
+		min-width: fit-content;
+		background-color: rgb(209, 49, 49);
+		outline: none;
+		color: whitesmoke;
+		padding: 6px 20px;
+		margin: 0 5px;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+
+	button:hover {
+		box-shadow: 0 0 5px grey;
+	}
+
+	.main-auth {
+		min-width: fit-content;
+
+		.fa-user {
+			padding: 10px;
+			cursor: pointer;
+		}
+
+		.fa-user:hover {
+			margin-top: 1px;
+			border-bottom: 1px solid rgb(150, 150, 150);
+		}
+
+		button {
+			font-size: 15px;
+			border-radius: 0;
+			color: #333;
+			padding: 6px 5px;
+			margin: 0 -1px;
+			background-color: transparent;
+		}
+
+		button:hover {
+			margin-top: 1px;
+			box-shadow: none;
+			border-bottom: 1px solid rgb(150, 150, 150);
+		}
+
+		.divider {
+			width: 1px;
+			height: 25px;
+			background-color: #333;
+		}
+	}
+
+	.subHeader {
+		.container {
+			.flex {
+				height: 60px;
+			}
+		}
+
+		.flex {
+			justify-content: space-between;
+		}
+	}
+}
+
+@media only screen and (min-width: 3100px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(2.25);
+		width: calc(100% / 2.25);
+		height: 60px;
+		.container {
+			width: 1100px;
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+	}
+
+	#searchBar {
+		width: 450px;
+	}
+
+	#search {
+		width: 420px;
+	}
+
+	.image {
+		width: 130px;
+	}
+
+	.hide {
+		display: block;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 3100px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(1.5);
+		width: calc(100% / 1.5);
+		height: 60px;
+		.container {
+			width: 1100px;
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+	}
+
+	#searchBar {
+		width: 450px;
+	}
+
+	#search {
+		width: 420px;
+	}
+
+	.image {
+		width: 130px;
+	}
+
+	.hide {
+		display: block;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 1920px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(1);
+		width: calc(100% / 1);
+		height: 60px;
+		.container {
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+	}
+
+	#searchBar {
+		width: 450px;
+	}
+
+	#search {
+		width: 420px;
+	}
+
+	.image {
+		width: 130px;
+	}
+
+	.hide {
+		display: block;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 1080px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(0.65);
+		width: calc(100% / 0.65);
+		height: 60px;
+		.container {
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+	}
+
+	.image {
+		width: 130px;
+	}
+
+	.hide {
+		display: block;
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 860px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(0.5);
+		width: calc(100% / 0.5);
+		height: 60px;
+		.container {
+			margin: 0 auto;
+			padding: 0 10px;
+		}
+	}
+
+	.image {
+		width: 130px;
+	}
+
+	.hide {
+		display: none;
+		width: 0;
+	}
+}
+
+@media only screen and (max-width: 620px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(0.4);
+		width: calc(100% / 0.4);
+		height: 60px;
+
+		.container {
+			margin: 0 auto;
+			padding: 0 10px;
+		}
+
+		.image {
+			margin-top: -3px;
+			width: 130px;
+		}
+	}
+
+	.hide {
+		display: none;
+		width: 0;
+	}
+}
+@media only screen and (max-width: 375px) {
+	.navbar {
+		transform-origin: left top;
+		transform: scale(1);
+		width: calc(100% / 1);
+		height: 60px;
+		.container {
+			margin: 0 auto;
+			padding: 0 10px;
+		}
+
+		.image {
+			display: none;
+			width: 0px;
+		}
+	}
+
+	#searchBar {
+		min-width: 90px;
+		width: auto;
+	}
+
+	#search {
+		width: 60px;
+	}
+
+	.hide {
+		display: none;
+		width: 0;
+	}
+}

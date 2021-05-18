@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+	outline: none;
+	// font-family: Poppins, sans-serif;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+html {
+	background-color: #eeeeee;
+}
+
+body {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-track {
+	border-radius: 15px;
+}
+
+body::-webkit-scrollbar {
+	width: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: #870006;
+}
+
+img {
+	width: 100%;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 0 20px;
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	overflow: hidden;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+}
