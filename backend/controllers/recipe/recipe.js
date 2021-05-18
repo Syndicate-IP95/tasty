@@ -42,7 +42,7 @@ exports.saveRecipe = (req, res) => {
       const savedUrl = await uploadFileToAWS(body.file);
 
       const newRecipe = new Recipe({
-        author,
+        user_id,
         title: body.title,
         content: body.content,
         ings: JSON.parse(body.ings),
@@ -51,18 +51,14 @@ exports.saveRecipe = (req, res) => {
 
       if (savedUrl && savedUrl.message) {
         res.writeHead(500, headers);
-        return res.end(
-          JSON.stringify({ message: `${e}` })
-        );
+        return res.end(JSON.stringify({ message: `${e}` }));
       }
 
       await newRecipe.save();
     } catch (e) {
       console.log(e);
       res.writeHead(500, headers);
-      return res.end(
-        JSON.stringify({ message: `${e}` })
-      );
+      return res.end(JSON.stringify({ message: `${e}` }));
     }
 
     res.writeHead(200, headers);

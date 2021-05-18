@@ -14,13 +14,7 @@ class User {
 
         return pool.query(command, [email]);
     }
-    // methods
-  
-    //update user data
-    // update() {
-        
-    // }
-    //delete form database
+    
     delete() {
         const { id } = this.info;
         const command = 'DELETE FROM users WHERE id = $1';

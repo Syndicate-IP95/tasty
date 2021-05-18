@@ -1,61 +1,118 @@
 const { pool } = require("../db/database");
 const Recipe = require("../models/recipe");
 
-const fakeRecipe = {
-  author: {
-    userId: 1,
-    name: "Petro",
-    surname: "Petruk",
-  },
-  title: "some recipe",
-  ings: JSON.stringify([{ label: "Творог", id: "gr", weight: "100" }]),
+const borshch = {
+  user_id: 1,
+  title: "borshch",
+  photo_url:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Borscht_served.jpg/330px-Borscht_served.jpg",
+  rating: 4.21,
+  category: "soup",
+  tag: "ukrainian_cookery",
+  ingredients: "ingredients",
   steps:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  file: null,
+    "recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe ",
 };
 
-const fakeRecipe1 = {
-  author: {
-    userId: 1,
-    name: "Petro",
-    surname: "Petruk",
-  },
-  title: "some recipe",
-  ings: JSON.stringify([{ label: "Творог123", id: "gr", weight: "200" }]),
+const sushi = {
+  user_id: 2,
+  title: "sushi",
+  photo_url:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Borscht_served.jpg/330px-Borscht_served.jpg",
+  rating: 4.25,
+  category: "sushi",
+  tag: "japanese_cookery",
+  ingredients:
+    "ingredients ingredients  ingredients  ingredients  ingredients ",
   steps:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  file:
-    "https://image-storing-bucket.s3.amazonaws.com/182a6e50-acc9-11eb-ac3c-294310cbed9a.jpeg",
+    "recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe ",
 };
 
-// testing creating new recipe and check length before & after
-test("length increases by 1, when we add new recipe", async () => {
+const pizza = {
+  user_id: 2,
+  title: "sushi",
+  photo_url:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Borscht_served.jpg/330px-Borscht_served.jpg",
+  rating: 4.5,
+  category: "sushi",
+  tag: "italian_cookery",
+  ingredients:
+    "ingredients ingredients  ingredients  ingredients  ingredients ",
+  steps:
+    "recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe ",
+};
+
+test("adding new recipe works", async () => {
   await pool.query(`DELETE FROM recipes;`);
-
   let firstLength = await pool.query("SELECT * FROM recipes");
   firstLength = firstLength.rows.length;
-
-  const newRecipe = new Recipe(fakeRecipe);
-
+  const newRecipe = new Recipe(borshch);
   await newRecipe.save();
-
   let secondLength = await pool.query("SELECT * FROM recipes");
   secondLength = secondLength.rows.length;
-
   expect(secondLength - firstLength).toBe(1);
 });
 
-// tesing if db saving image url if we pass it through save method
-test("tesing if db saving image url if we pass it through save method", async () => {
+test("get all works", async () => {
   await pool.query(`DELETE FROM recipes;`);
+  const Borshch = new Recipe(borshch);
+  await Borshch.save();
+  const Sushi = new Recipe(sushi);
+  await Sushi.save();
+  const recipes = await Recipe.getAll();
+  expect(recipes.rows.length).toBe(2);
+});
 
-  const newRecipe = new Recipe(fakeRecipe1);
+test("getByCategory works", async () => {
+  await pool.query(`DELETE FROM recipes;`);
+  const Borshch = new Recipe(borshch);
+  await Borshch.save();
+  const Sushi = new Recipe(sushi);
+  await Sushi.save();
+  const recipes = await Recipe.getByCategory("soup");
+  expect(recipes.rows.length).toBe(1);
+});
 
-  await newRecipe.save();
+test("getByTag works", async () => {
+  await pool.query(`DELETE FROM recipes;`);
+  const Borshch = new Recipe(borshch);
+  await Borshch.save();
+  const Sushi = new Recipe(sushi);
+  await Sushi.save();
+  const recipes = await Recipe.getByTag("japanese_cookery");
+  expect(recipes.rows.length).not.toBe(0);
+});
 
-  let select = await pool.query(
-    `SELECT * FROM recipes WHERE photo_url = 'https://image-storing-bucket.s3.amazonaws.com/182a6e50-acc9-11eb-ac3c-294310cbed9a.jpeg'`
-  );
+test("getByUserId works", async () => {
+  await pool.query(`DELETE FROM recipes;`);
+  const Borshch = new Recipe(borshch);
+  await Borshch.save();
+  const Sushi = new Recipe(sushi);
+  await Sushi.save();
+  const recipes = await Recipe.getByUserId(1);
+  expect(recipes.rows.length).toBe(1);
+});
 
-  expect(select.rows).not.toBe(0);
+test("getById works", async () => {
+  await pool.query(`DELETE FROM recipes;`);
+  const Borshch = new Recipe(borshch);
+  await Borshch.save();
+  let id = await pool.query(`SELECT * FROM recipes`);
+  id = id.rows[0]["id"];
+  const recipes = await Recipe.getById(id);
+  expect(recipes.rows.length).toBe(1);
+});
+
+test("sortByRating works", async () => {
+  await pool.query(`DELETE FROM recipes;`);
+  const Borshch = new Recipe(borshch);
+  await Borshch.save();
+  const Sushi = new Recipe(sushi);
+  await Sushi.save();
+  const Pizza = new Recipe(pizza);
+  await Pizza.save();
+  let recipes = await Recipe.sortByRating();
+  recipes = recipes.rows.map((rec) => Number(rec["rating"]));
+  const result = recipes.slice(1).every((item, i) => recipes[i] >= item);
+  expect(result).toBe(true);
 });

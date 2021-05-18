@@ -1,13 +1,13 @@
 const { logIn, signUp, getUserInfo } = require("../controllers/auth/auth");
 
 const authRouter = {
-  "/login": {
+  "^/login$": {
     POST: (req, res) => logIn(req, res),
   },
-  "/signup": {
+  "^/signup$": {
     POST: (req, res) => signUp(req, res),
   },
-  "/getUser": {
+  "^/getUser$": {
     GET: (req, res) => getUserInfo(req, res),
   },
 };

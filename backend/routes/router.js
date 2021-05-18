@@ -1,28 +1,32 @@
-const authR = require('./auth');
-const recipeR = require('./recipe');
-const { headers } = require('../utils/headers/headers');
+const authR = require("./auth");
+const recipeR = require("./recipe");
+const { headers } = require("../utils/headers/headers");
 
 class Router {
+  constructor(url, method) {
+    this.url = url;
+    this.method = method;
+    this.routes = {
+      ...authR,
+      ...recipeR,
+    };
+  }
 
-    constructor(url, method) {
-        this.url = url;
-        this.method = method;
-        this.routes = {
-            ...authR,
-            ...recipeR
-        }
-    }
-
-    usage(req, res) {
-        const { url, method, routes } = this;
-        
-        if (routes[url] && routes[url][method]) {
-            routes[url][method](req, res);
+  async usage(req, res) {
+    const { url, method, routes } = this;
+    for (const route in routes) {
+      const regex = new RegExp(route);
+      if (regex.test(url)) {
+        if (url.includes("?")) {
+          const param = url.slice(url.indexOf("=") + 1, url.length);
+          const result = await routes[route][method](param);
+          res.end(JSON.stringify(result.rows));
         } else {
-            res.writeHead(404, headers);
-            res.end(JSON.stringify({message: 'Not Found'}));
+          routes[route][method](req, res);
         }
+      }
     }
+  }
 }
 
 module.exports = Router;
