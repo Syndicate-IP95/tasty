@@ -42,20 +42,22 @@
 					display: flex;
 					height: 51px;
 					margin-top: -7px;
+					flex-direction: column;
 
 					.fa-user {
 						padding: 7px;
 					}
 
 					.nick {
-						margin-top: 6px;
+						margin-top: -25px;
+						margin-left: 30px;
 						font-size: 16px;
 						font-weight: bolder;
 					}
 
 					.description {
-						margin-top: 27px;
-						margin-left: -50px;
+						margin-top: 5px;
+						margin-left: 6px;
 						font-size: 14px;
 					}
 				}

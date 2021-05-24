@@ -1,5 +1,5 @@
 import axios from "axios";
-const backendUrl = "https://tasty-nadiya.herokuapp.com/";
+const backendUrl = "http://localhost:5001";
 
 const service = axios.create({
   baseURL: backendUrl,

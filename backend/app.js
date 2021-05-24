@@ -1,13 +1,11 @@
 "use strict";
 
-require("dotenv/config");
-const { pool } = require("./db/database");
+require("dotenv").config();
 const http = require("http");
 const { headers } = require("./utils/headers/headers");
 const Router = require("./routes/router");
 
 const server = http.createServer(async (req, res) => {
-
   if (req.method === "OPTIONS") {
     res.writeHead(204, headers);
     res.end();
@@ -18,7 +16,6 @@ const server = http.createServer(async (req, res) => {
   router.usage(req, res);
 });
 
-
-server.listen(process.env.PORT, () => {
-  console.log(`server running`);
+server.listen(process.env.PORT, process.env.HOST, () => {
+  console.log(`server running in ${process.env.HOST}:${process.env.PORT}`);
 });
