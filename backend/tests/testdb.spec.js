@@ -36,9 +36,12 @@ const pizza = {
 	steps: "recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe recipe "
 };
 
+beforeEach(() => {
+	await pool.query(`DELETE FROM recipes;`);
+});
+
 //test adding new recipes
 test("adding new recipe works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	let firstLength = await pool.query("SELECT * FROM recipes");
 	firstLength = firstLength.rows.length;
 	const newRecipe = new Recipe(borshch);
@@ -50,7 +53,6 @@ test("adding new recipe works", async () => {
 
 //test getting all recipes from db
 test("get all works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	const Borshch = new Recipe(borshch);
 	await Borshch.save();
 	const Sushi = new Recipe(sushi);
@@ -61,7 +63,6 @@ test("get all works", async () => {
 
 //test getting recipes from db by catagory
 test("getByCategory works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	const Borshch = new Recipe(borshch);
 	await Borshch.save();
 	const Sushi = new Recipe(sushi);
@@ -72,7 +73,6 @@ test("getByCategory works", async () => {
 
 //test getting recipes from db by tag
 test("getByTag works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	const Borshch = new Recipe(borshch);
 	await Borshch.save();
 	const Sushi = new Recipe(sushi);
@@ -83,7 +83,6 @@ test("getByTag works", async () => {
 
 //test getting recipes from db by user ID
 test("getByUserId works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	const Borshch = new Recipe(borshch);
 	await Borshch.save();
 	const Sushi = new Recipe(sushi);
@@ -94,7 +93,6 @@ test("getByUserId works", async () => {
 
 //test getting recipes from db by ID
 test("getById works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	const Borshch = new Recipe(borshch);
 	await Borshch.save();
 	let id = await pool.query(`SELECT * FROM recipes`);
@@ -105,7 +103,6 @@ test("getById works", async () => {
 
 //test sorting recipes by rating from db
 test("sortByRating works", async () => {
-	await pool.query(`DELETE FROM recipes;`);
 	const Borshch = new Recipe(borshch);
 	await Borshch.save();
 	const Sushi = new Recipe(sushi);
