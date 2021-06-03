@@ -9,7 +9,7 @@ const {
 
 const recipeRouter = {
   "^/recipes/all": {
-    GET: () => getAll(),
+    GET: (req, res) => getAll(),
   },
   "^/recipes/\\?tag=\\w+": {
     GET: (tag) => getByTag(tag),

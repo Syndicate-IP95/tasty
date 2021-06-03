@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const { getAll, getByCategory } = require("../models/recipe");
+const { getAll } = require("../models/recipe");
 test("get recipe by user_id works", async () => {
   const response = await fetch("http://localhost:5001/recipes/?user_id=1", {
     method: "GET",

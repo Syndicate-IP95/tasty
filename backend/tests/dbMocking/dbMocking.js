@@ -1,5 +1,6 @@
 const { Client } = require("pg");
 const { success, failure } = require("./handler");
+require("dotenv").config();
 
 const getAlerts = async (event, context) => {
   const client = new Client({
