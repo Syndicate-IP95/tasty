@@ -21,8 +21,7 @@ class Router {
 				if (url.includes("?")) {
 					const param = url.slice(url.indexOf("=") + 1, url.length);
 					const result = await routes[route][method](param);
-					res.setHeader("Access-Control-Allow-Origin", "*");
-					res.setHeader("Access-Control-Allow-Headers", "origin, content-type, accept");
+					res.writeHead(200, headers);
 					res.end(JSON.stringify(result.rows));
 				} else {
 					const controller = routes[route][method];
@@ -30,8 +29,7 @@ class Router {
 						controller(req, res);
 					} else {
 						const result = await controller();
-						res.setHeader("Access-Control-Allow-Origin", "*");
-						res.setHeader("Access-Control-Allow-Headers", "origin, content-type, accept");
+						res.writeHead(200, headers);
 						res.end(JSON.stringify(result.rows));
 					}
 				}
